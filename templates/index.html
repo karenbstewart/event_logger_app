@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    <form action="/event-list" method="POST">
+        <label for="date">Date</label>
+        <input type="date" name="date" id="id_date">
+        <br>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="id_name">
+        <br>
+        <label for="num_of_guests">Number of guests</label>
+        <input type="text" name="num_of_guests" id="id_num_of_guests">
+        <br>
+        <label for="room_location">Room Location</label>
+        <input type="text" name="room_location" id="id_room_location">
+        <br>
+        <label for="description">Description</label>
+        <input type="text" name="description" id="id_description">
+        <br>
+        <label for="recurring">Is it recurring?</label>
+        <input type="checkbox" name="recurring" id="id_recurring">
+        <br>
+        <input type="submit" value="Add Event">
+
+    </form>
+</div>
+
+    {% for event in events %}
+    <div>
+        <p>{{event.description}} on the {{event.date}}: {{event.num_of_guests}} guests in room {{event.room_location}} 
+            {% if event.recurring == True %}
+            <span> &#9989; </span>
+            {% else %}
+            <span> &#10060; </span>
+            {% endif %}
+        </p>
+    </div>
+    {% endfor %}
+
+{% endblock %}
